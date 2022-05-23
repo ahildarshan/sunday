@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment{
-        MY_FILE = fileExists 'Software-Development'
-        EMAIL_TO = 'diwakard158@gmail.com'
+        MY_FILE = fileExists 'sunday'
+        EMAIL_TO = 'ahildarshan04@gamil.com'
     }
     post {
         success {
@@ -30,14 +30,14 @@ pipeline {
         stage('clone repo') {
             when { expression { MY_FILE == 'false' } }
             steps {
- 	            bat "git clone https://github.com/diwakarsrinivas/Software-Development.git"
+ 	            bat "git clone https://github.com/ahildarshan/sunday.git"
  	            print "pulled the code"
             }
         }
         stage('Compile') {
             steps {
                 bat """
-                cd Software-Development
+                cd sunday
                 mvn compile
                 """
             }
@@ -45,7 +45,7 @@ pipeline {
         stage('Test') {
             steps {
                bat"""
-               cd Software-Development
+               cd sunday
                mvn test
                """
             }
@@ -53,7 +53,7 @@ pipeline {
         stage('Package') {
             steps {
                bat"""
-               cd Software-Development
+               cd sunday
                mvn package
                """
             }
